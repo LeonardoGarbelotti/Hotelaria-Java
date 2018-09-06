@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Quartos</title>
+            </f:facet>
+        </h:head>
+    </f:view>
+    <h:body>
+        <p/>    
+        <h:form id="formPrincipal">
+            <h:link outcome="/login-adm-success" value="Voltar" />
+            <p/>
+            <h:panelGrid columns="2" >
+                <p:outputLabel value="Quarto: " />
+                <p:selectOneMenu id="comboQuarto" converter="quartoConverter" 
+                                 required="true" requiredMessage="Selecione o quarto"  
+                                 value="#{alugarQuarto.alugar.quarto}" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Escolha um quarto" 
+                                  noSelectionOption="false"/>
+                    <f:selectItems value="#{alugarQuarto.quartos}" 
+                                   var="qua"
+                                   itemValue="#{qua}"
+                                   itemLabel="#{qua.tipo}"/>
+                </p:selectOneMenu> 
+                <p:outputLabel value="Cliente: " />
+                <p:selectOneMenu id="comboCliente" converter="clienteConverter" 
+                                 required="true" requiredMessage="Selecione o usuário"  
+                                 value="#{alugarQuarto.alugar.cliente}" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Escolha um usuário" 
+                                  noSelectionOption="false"/>
+                    <f:selectItems value="#{alugarQuarto.clientes}" 
+                                   var="cli"
+                                   itemValue="#{cli}"
+                                   itemLabel="#{cli.nome}"/>
+                </p:selectOneMenu> 
+                <p:outputLabel value="Data retirada: " />
+                <p:calendar  id="dataRetirada" timeZone="GMT-3" pattern="dd/MM/yyyy" 
+                             value="#{alugarQuarto.alugar.checkin}"
+                             locale="pt" showOn="button"
+                             required="true" requiredMessage="DATA é obrigatória">
+                </p:calendar>
+                <p:commandButton value="gravar" action="#{alugarQuarto.registrarAluguel()}"
+                                 update="@form"  />
+            </h:panelGrid>
+
+            <p/>
+            <p:messages />
+        </h:form>
+    </h:body>
+</html>

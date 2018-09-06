@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="template/template.xhtml">
+        
+        <ui:define name="body">
+            <h:form>
+                <p:outputPanel style="width: 100%; text-align: right" >
+                    <h:link value="sair" outcome="index" />
+                    <br/>
+                    <p:separator/>
+                </p:outputPanel>
+                <p/>
+                <h:link outcome="funcionario/listaFuncionario" value="Gerenciar Funcionários"/>
+                <p/>
+                <h:link outcome="cliente/clienteGerenciar" value="Gerenciar clientes"/>
+                <p/>
+                <h:link outcome="quarto/quartoGerenciar" value="Gerenciar quartos"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:include src="/template/header.xhtml"/>
+    <h:head>
+        <title>Hotel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form id="formPrincipal">
+            <p/>
+
+            <!-- CAMPO NOME -->
+            <p:outputLabel id="campoNome" value="Nome: "/>
+            <p:inputText value="#{clienteGerenciar.cliente.nome}" 
+                         required="true" requiredMessage="Nome obrigatório"
+                         maxlength="60" />
+            <p/>
+
+            <!-- CAMPO IDADE -->
+            <p:outputLabel id="campoEmail" value="Email: "/>
+            <p:inputText value="#{clienteGerenciar.cliente.email}" 
+                         required="true" requiredMessage="Email obrigatório"
+                         maxlength="60" />
+            <p/>
+
+            <!-- CAMPO FUNCAO -->
+            <p:outputLabel id="campoLogin" value="Login: "/>
+            <p:inputText value="#{clienteGerenciar.cliente.login}" 
+                         required="true" requiredMessage="Nome de Login obrigatório"
+                         maxlength="30" />
+            <p/>
+
+            <!-- CAMPO ENDEREÇO -->
+            <p:outputLabel id="campoSenha" value="Senha: "/>
+            <p:inputText value="#{clienteGerenciar.cliente.senha}" 
+                         required="true" requiredMessage="Senha obrigatória"
+                         maxlength="15" />
+            <p/>
+
+           
+            <!-- BOTAO PARA INSERIR VALORES -->
+            <p:commandButton value="Salvar" action="#{clienteGerenciar.inserirCliente()}" 
+                             update="@form" />
+            <p/>
+            <p:messages />
+
+        </h:form>
+        <br />
+        
+    </h:body>
+</html>

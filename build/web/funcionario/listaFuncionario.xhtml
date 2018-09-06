@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Funcionários</title>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <p/>
+        <h:form id="formPrincipal">
+            <h:link outcome="/login-adm-success" value="Voltar" />
+            <p/>
+            <h:link outcome="novoFuncionario.xhtml" value="Cadastrar novo funcionário" />
+            <p/>
+            <p:dataTable id="tabFuncionarios" emptyMessage="Nenhum funcionário cadastrado."
+                         var="funcionario" value="#{usuarioGerenciar.listaFuncionarios}">
+                <p:column headerText="Código:" >
+                    <h:outputText value="#{funcionario.id}"/>
+                </p:column>
+                <p:column headerText="Nome:" >
+                    <h:outputText value="#{funcionario.nome}"/>
+                </p:column>
+                <p:column headerText="Idade:" >
+                    <h:outputText value="#{funcionario.idade}"/>
+                </p:column>
+                <p:column headerText="Função:" >
+                    <h:outputText value="#{funcionario.funcao}"/>
+                </p:column>
+                <p:column headerText="Endereço:" >
+                    <h:outputText value="#{funcionario.endereco}"/>
+                </p:column>
+                <p:column headerText="Telefone:" >
+                    <h:outputText value="#{funcionario.telefone}"/>
+                </p:column>
+                <p:column headerText="Salário:" >
+                    <h:outputText value="#{funcionario.salario}"/>
+                </p:column>
+                
+                <!-- PARA EXCLUIR FUNCIONARIOS -->
+                <p:column headerText=" " style="text-align: center">
+                    <p:commandLink value="Excluir"  immediate="true" 
+                                   action="#{usuarioGerenciar.excluirFuncionario(funcionario)}"
+                                   update="@form">
+                        <p:confirm header="Excluir" message="Você tem certeza que deseja excluir este usuário?"
+                                   icon="ui-icon-alert"/>
+                    </p:commandLink>
+                </p:column>
+                
+                <!-- PARA EDITAR FUNCIONARIOS -->
+                <p:column headerText="" style="text-align: center">
+                    <p:commandLink value="Editar" 
+                                   action="#{usuarioGerenciar.preparaEditarFuncionario(funcionario)}"
+                                   onclick="PF('editarFuncionarioDlg').show()"
+                                   update="@form, :formEditarFuncionario"/>
+                </p:column> 
+            </p:dataTable>
+            
+            <!-- PARA EXCLUIR FUNCIONARIOS (POPUP) -->
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:outputPanel>
+            </p:confirmDialog>
+        </h:form>
+        <ui:include src="alterarFuncionario.xhtml" />
+    </h:body>
+</html>

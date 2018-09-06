@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="editarFuncionarioDlg" appendTo="@(body)" closable="false"
+                  modal="true" resizable="true" 
+                  widgetVar="editarFuncionarioDlg" header="Editar usuário" >
+
+            <h:form id="formEditarFuncionario">
+                <p:messages closable="true" autoUpdate="true" showIcon="false" />               
+                <h:panelGrid columns="6" >   
+
+                    <!-- CAMPO NOME -->
+                    <p:outputLabel id="campoNome" value="Nome: "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.nome}" 
+                                 required="true" requiredMessage="Nome obrigatório."
+                                 maxlength="50" />
+                   
+                    <!-- CAMPO IDADE -->
+                    <p:outputLabel id="campoIdade" value="Idade: "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.idade}" 
+                                 required="true" requiredMessage="Idade obrigatória."
+                                 maxlength="2" />
+                   
+                    <!-- CAMPO FUNCAO -->
+                    <p:outputLabel id="campoFuncao" value="Função: "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.funcao}" 
+                                 required="true" requiredMessage="Função obrigatória."
+                                 maxlength="30" />
+                   
+                    <!-- CAMPO ENDEREÇO -->
+                    <p:outputLabel id="campoEndereco" value="Endereço: "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.endereco}" 
+                                 required="true" requiredMessage="Endereço obrigatório."
+                                 maxlength="60" />
+                    
+                    <!-- CAMPO TELEFONE -->
+                    <p:outputLabel id="campoTelefone" value="Telefone/Celular: "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.telefone}" 
+                                 required="true" requiredMessage="Número obrigatório."
+                                 maxlength="15" />
+                    
+                    <!-- CAMPO SALARIO -->
+                    <p:outputLabel id="campoSalario" value="Salario(mensal): "/>
+                    <p:inputText value="#{usuarioGerenciar.temp.salario}" 
+                                 maxlength="6" />
+                    
+                    
+                </h:panelGrid>
+                
+                <p:outputPanel style="width: 100%; text-align:center" layout="block">
+                    <p:commandButton value="Cancelar" icon="ui-icon-close"
+                                     oncomplete="PF('editarFuncionarioDlg').hide()" immediate="true" 
+                                     update=":formPrincipal, :editarFuncionarioDlg"/>
+                    <p:commandButton value="Salvar" icon="ui-icon-check"
+                                     action="#{usuarioGerenciar.alterarFuncionario()}" immediate="false"
+                                     oncomplete="PF('editarFuncionarioDlg').hide()" 
+                                     update=":formPrincipal, :editarFuncionarioDlg"/>
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

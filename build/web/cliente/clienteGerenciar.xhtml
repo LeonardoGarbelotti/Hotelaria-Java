@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Clientes</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <p/>    
+            <h:form id="formPrincipal">
+                <h:link outcome="/login-adm-success" value="Voltar" />
+                <p/>
+                <p:commandLink styleClass="botaoLink" value="Cadastrar-se"                 
+                               action="#{clienteGerenciar.abrirPopupNovo()}"
+                               update="@form, popupNovo"/>
+                <p/>
+                <p:dataTable id="tabClientes" emptyMessage="Nenhum cliente cadastrado."
+                             var="cliente" value="#{clienteGerenciar.listaClientes}">
+                    <p:column headerText="Código:" >
+                        <h:outputText value="#{cliente.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome:" >
+                        <h:outputText value="#{cliente.nome}"/>
+                    </p:column>
+                    <p:column headerText="Idade:" >
+                        <h:outputText value="#{cliente.email}"/>
+                    </p:column>
+                    <p:column headerText="Função:" >
+                        <h:outputText value="#{cliente.login}"/>
+                    </p:column>
+                    <p:column headerText="Endereço:" >
+                        <h:outputText value="#{cliente.senha}"/>
+                    </p:column>
+
+                    <!-- PARA EXCLUIR CLIENTES -->
+                    <p:column headerText=" " style="text-align: center">
+                        <p:commandLink value="Excluir"  immediate="true" 
+                                       action="#{clienteGerenciar.excluirCliente(cliente)}"
+                                       update="@form">
+                            <p:confirm header="Excluir" message="Você tem certeza que deseja excluir este usuário?"
+                                       icon="ui-icon-alert"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <!-- PARA EDITAR FUNCIONARIOS 
+                    <p:column headerText="" style="text-align: center">
+                        <p:commandLink value="Editar" 
+                                       action="#{clienteGerenciar.preparaEditarCliente(cliente)}"
+                                       onclick="PF('editarClienteDlg').show()"
+                                       update="@form, :formEditarCliente"/>
+                    </p:column> -->
+                </p:dataTable>
+
+                <!-- PARA EXCLUIR CLIENTES (POPUP) -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:outputPanel>
+                </p:confirmDialog>
+            </h:form>
+            
+            <p:dialog closable="false" modal="true" header="Novo usuario" id="popupNovo"  
+                      widgetVar="popupNovo"  visible="#{clienteGerenciar.mostraPopupNovo}"  >
+                <h:form id="formIncluirCliente" >
+                    <h:panelGrid columns="4">
+                        <p:outputLabel value="Nome: "/>
+                        <p:inputText  value="#{clienteGerenciar.cliente.nome}" 
+                                     maxlength="50" 
+                                     required="true" requiredMessage="Nome obrigatório" > 
+                        </p:inputText>
+                        <p:outputLabel value="Email: "/>
+                        <p:inputText value="#{clienteGerenciar.cliente.email}" maxlength="60"
+                                     required="true" requiredMessage="Email obrigatória"/>
+                        <p:outputLabel value="Login: "/>
+                        <p:inputText id="campoLogin" value="#{clienteGerenciar.cliente.login}" 
+                                     maxlength="30" 
+                                     required="true" requiredMessage="Nome para Login obrigatório" > 
+                        </p:inputText>
+                        <p:outputLabel value="Senha: "/>
+                        <p:inputText  value="#{clienteGerenciar.cliente.senha}" 
+                                     maxlength="15" 
+                                     required="true" requiredMessage="Senha obrigatória" > 
+                        </p:inputText>
+                    </h:panelGrid>
+                    <p:outputPanel style="width: 100%; text-align:center" layout="block">
+                        <p:commandButton value="Cancelar" action="#{clienteGerenciar.fecharPopupNovo()}"
+                                         update=":popupNovo" immediate="true" />
+                        <p:commandButton value="Confirmar" action="#{clienteGerenciar.inserirCliente()}" 
+                                         update=":popupNovo, :formPrincipal"/>                           
+                    </p:outputPanel>
+                    <h:panelGrid columns="1">
+                        <p:messages showIcon="false" />
+                    </h:panelGrid>   
+                </h:form>
+            </p:dialog>
+
+
+           <!-- <ui:include src="usuarioAlterar.xhtml" /> -->
+        </h:body>
+    </f:view>
+</html>

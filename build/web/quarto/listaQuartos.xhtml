@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Quartos</title>
+        </f:facet>
+    </h:head>
+    <h:body>
+        <p/>
+        <h:form id="formPrincipal">
+            <h:link outcome="/quarto/quartoGerenciar" value="Voltar" />
+            <p/>
+
+            <p:dataTable id="tabQuartos" emptyMessage="Nenhum quarto cadastrado."
+                         var="quarto" value="#{quartoGerenciar.listaQuartos}">
+                <p:column headerText="Código:" >
+                    <h:outputText value="#{quarto.id}"/>
+                </p:column>
+                <p:column headerText="Tipo:" >
+                    <h:outputText value="#{quarto.tipo}"/>
+                </p:column>
+                <p:column headerText="Tamanho:" >
+                    <h:outputText value="#{quarto.tamanho}"/>
+                </p:column>
+                <p:column headerText="Número de Camas:" >
+                    <h:outputText value="#{quarto.camas}"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+    </h:body>
+</html>
